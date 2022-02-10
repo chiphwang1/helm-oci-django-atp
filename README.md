@@ -96,8 +96,7 @@ autodbtest301   autodbtest301   OLTP         Active   ocid1.autonomousdatabase.o
  
  Oracle client credentials (wallet files) are required to connect to an Autonomous Database. Typically wallet files are downloaded from the OCI console or CLI, but the wallet files are also exposed as a secret within the Kubernetes cluster. The name of the secret is defined in values.yaml file under wallet.walletName and can be extracted with the kubectl command-line. In this Helm chart, the secret is extracted with a python script. An example of the script is provided in the python folder in this repository.
 
-## How to Connect Django Web Framework to Autonomous Database
-
+The following are the files kept in the secret with the key as the file name and the values as the file contents.
 
 | Parameter          | Description                                                              | Type   |
 | ------------------ | ------------------------------------------------------------------------ | ------ |
@@ -112,8 +111,11 @@ autodbtest301   autodbtest301   OLTP         Active   ocid1.autonomousdatabase.o
 
 
 
+## How to Connect the Django Web Framework to an Autonomous Database
 
+The Django Web Framework requires the folloiwng prerequistes to to connect to an Autonomous Database.
 
+**1. Clone or download the contents of this repo** 
      
 
 
