@@ -1,0 +1,142 @@
+---
+# Source: helm-oci-django-atp/templates/service-account.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: internal-kubectl
+---
+# Source: helm-oci-django-atp/templates/db-secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: dbpassword
+type: Opaque
+data:
+  password: "Q2hoJSU2Nzg5Njc4OXBzaA=="
+---
+# Source: helm-oci-django-atp/templates/wallet-secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: walletpassword
+type: Opaque
+data:
+  walletPassword: "Q2hoJSU2Nzg5Njc4OXBzaA=="
+---
+# Source: helm-oci-django-atp/templates/role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: get-secrets
+rules:
+  - apiGroups: [""]
+    resources: ["secrets", "namespaces"]
+    verbs:
+      - get
+      - list
+      - watch
+---
+# Source: helm-oci-django-atp/templates/role-binding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: get-secrets
+subjects:
+  - kind: ServiceAccount
+    name: internal-kubectl
+roleRef:
+  kind: Role
+  name: get-secrets
+  apiGroup: rbac.authorization.k8s.io
+---
+# Source: helm-oci-django-atp/templates/django-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: RELEASE-NAME-helm-oci-django-atp
+  labels:
+    helm.sh/chart: helm-oci-django-atp-0.1.0
+    app.kubernetes.io/name: helm-oci-django-atp
+    app.kubernetes.io/instance: RELEASE-NAME
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: helm-oci-django-atp
+      app.kubernetes.io/instance: RELEASE-NAME
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: helm-oci-django-atp
+        app.kubernetes.io/instance: RELEASE-NAME
+    spec:
+      serviceAccountName: internal-kubectl
+      initContainers:
+      - name: django-init
+        image: chiphwang/checkautodb:1.9
+        command: [ "python3", "./check_autodb.py" ]
+        env:
+        - name: secret_name
+          value: autodbwallet
+        - name: path
+          value: /wallet
+        volumeMounts:
+        - name: wallet
+          mountPath: /wallet
+      containers:
+        - name: helm-oci-django-atp
+          image: chiphwang/django_atp:1.6
+          command: [ "/bin/bash", "-c", "./setup.sh" ]
+          env:
+          - name: DBNAME
+            value: autodbtest301_high
+          - name: DBPASSWORD
+            value: Chh%%67896789psh
+          - name: DBUSER
+            value: 'admin'
+          volumeMounts:
+          - name: wallet
+            mountPath: /wallet
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+      volumes:
+      -name: wallet
+      emptyDir: {}
+---
+# Source: helm-oci-django-atp/templates/autonomous-database.yaml
+apiVersion: oci.oracle.com/v1beta1
+kind: AutonomousDatabases
+metadata:
+  name: autodbtest301
+spec:
+  compartmentId: 
+  displayName: autodbtest301
+  dbName: autodbtest301
+  dbWorkload: OLTP
+  isDedicated: false
+  dbVersion: 
+  dataStorageSizeInTBs: 2
+  cpuCoreCount: 2
+  adminPassword:
+    secret:
+      secretName: dbpassword
+  isAutoScalingEnabled: false
+  isFreeTier: false
+  licenseModel: 
+  wallet:
+    walletName: autodbwallet
+    walletPassword:
+      secret:
+        secretName: walletpassword
