@@ -120,7 +120,7 @@ The Django Web Framework requires the folloiwng prerequistes to to connect to an
      
      https://www.oracle.com/database/technologies/instant-client/downloads.html
      
-     To install the client on a Ubuntu server use the 
+     To install the client on a Ubuntu server use the following commands.
     
      sudo apt install alien libaio1
      wget https://download.oracle.com/otn_software/linux/instantclient/215000/oracle-instantclient-basic-21.5.0.0.0-1.x86_64.rpm
