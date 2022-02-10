@@ -135,7 +135,7 @@ The Django Web Framework requires the folloiwng prerequistes to to connect to an
      pip install cx_oracle
      
 
-**3. The settings.py on the Django server modified to use an Oracle Database**
+**3. The settings.py on the Django server nneds to be modified to use an Oracle Database**
 
 ```
 
