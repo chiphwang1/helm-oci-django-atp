@@ -63,7 +63,7 @@ The password must be between 8 and 32 characters long, and must contain at least
    http://<ip address of load balancer>/api
    
    ```  
-   To retrieve the IP adddress of the load balanacer use the following command
+   To retrieve the IP adddress of the load balancer use the following command
    
 ```sh
 $ kubectl -n <name of namespace> get svc django-service
@@ -110,9 +110,9 @@ The following are the files kept in the secret with the key as the file name and
 
 
 
-## How to Connect the Django Web Framework to an Autonomous Database. 
+## How to Connect the Django Web Framework to an Autonomous Database. T
 
-The following step are automated with this Helm Chart.
+**The following step are automated with this Helm Chart**.
 
 The Django Web Framework requires the folloiwng prerequistes to to connect to an Autonomous Database.
 
