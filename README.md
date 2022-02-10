@@ -4,7 +4,7 @@
 
 ## Introduction
 
-This Helm Chart will deploy an Oracle Cloud Infrastructure (OCI) Autonomous Database with an API server built with the Django framework. The API server will provide access to a user-profile database on the Autonomous Database to perfrom create, read, update and delete (CRUD) operations on the database. The API server will be accessible via a loadbalancer provisioned with an external IP address.
+This Helm Chart will deploy an Oracle Cloud Infrastructure (OCI) Autonomous Database with an API server built with the Django Web Framework. The API server will provide access to a user-profile database on the Autonomous Database to perfrom create, read, update and delete (CRUD) operations on the database. The API server will be accessible via a loadbalancer provisioned with an external IP address.
 
 To access the API server use /api extenison to the IP address of the loadbalancer.
 
