@@ -4,7 +4,13 @@
 
 ## Introduction
 
-This Helm Chart makes it easy to create and manage an Autonomous Database (ATP) from a Kubernetes cluster deployed within Oracle Cloud Infrastructure (OCI). The Kubernetes cluster can be deployed using Oracle Container Engine for Kubernetes (OKE) or a customer-managed cluster deployed on virtual machine instances.
+This Helm Chart will deploy an Oracle Cloud Infrastructure (OCI) Autonomous Database with an API server built with the Django framework. The API server will provide access to a user-profile database on the Autonomous Database to perfrom create, read, update and delete (CRUD) operations on the database. The API server will be accessible via a loadbalancer provisioned with an external IP address.
+
+To access the API server use /api extenison to the IP address of the loadbalancer.
+
+**Example**  
+http://<ip address of laodbalancer>/api/
+
 
 
 This Helm chart relies on the OCI Service Operator for Kubernetes (OSOK), and it is a pre-requisite to have OSOK deployed within the cluster to use this Helm chart.
@@ -23,11 +29,10 @@ This Helm chart relies on the OCI Service Operator for Kubernetes (OSOK), and it
 
 **1. Clone or download the contents of this repo** 
      
-     git clone https://github.com/chiphwang1/helm-oci-autonomous-db.git
-
+     git clone https://github.com/chiphwang1/helm-oci-django-atp.git
 **2. Change to the directory that holds the Helm Chart** 
 
-      cd ./helm-oci-autonomous-db
+      cd ./helm-oci-django-atp.git
 
 **3. Populate the values.yaml file with information to deploy the Autonomous Database resource**
 
