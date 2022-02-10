@@ -112,7 +112,7 @@ The following are the files kept in the secret with the key as the file name and
 
 
 
-## The Following describes the requirements to connect the Django Web Framework to an Autonomous Database. 
+## The Following describes the requirements to connect aDjango Web Framework to an Autonomous Database. 
 
 **These steps are automated with this Helm Chart. This is to provide guidance to attach other Django applications to an Autonomous Database**.
 
