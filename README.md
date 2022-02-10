@@ -135,7 +135,7 @@ The Django Web Framework requires the following prerequistes to to connect to an
 **2. The cx_Oracle python libary needs to be installed on the Django web server** 
      
      
-     pip install cx_oracle
+     pip install cx_Oracle
      
 
 **3. The settings.py on the Django server needs to be modified to use an Oracle Database**
