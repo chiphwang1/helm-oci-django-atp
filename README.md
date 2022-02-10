@@ -114,9 +114,18 @@ The following are the files kept in the secret with the key as the file name and
 
 The Django Web Framework requires the folloiwng prerequistes to to connect to an Autonomous Database.
 
-**1. Clone or download the contents of this repo** 
+**1. The Oracle instant clinet installed on the web Django web server** 
      
-
+     https://www.oracle.com/database/technologies/instant-client/downloads.html
+     
+     To install the client on a Ubuntu server use the 
+     ```
+     sudo apt install alien libaio1
+     wget https://download.oracle.com/otn_software/linux/instantclient/215000/oracle-instantclient-basic-21.5.0.0.0-1.x86_64.rpm
+     sudo alien -i oracle-instantclient-basic-21.5.0.0.0-1.x86_64.rpm
+     
+     ```
+     The wallet files will needs to be added to the /usr/lib/oracle/21/client64/lib/network/admin/ directory.
 
 
 ## Autonomous Database Specification Parameters
