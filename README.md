@@ -34,7 +34,7 @@ This Helm chart relies on the OCI Service Operator for Kubernetes (OSOK), and it
 
       cd ./helm-oci-django-atp.git
 
-**3. Populate the values.yaml file with information to deploy the Autonomous Database resource**
+**3. Populate the values.yaml file with the required information **
 
 
 **4. Create the namespace where the ATP resource will be deployed**
