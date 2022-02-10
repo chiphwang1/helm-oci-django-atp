@@ -55,7 +55,7 @@ The password must be between 8 and 32 characters long, and must contain at least
      helm  -n <namespace name> ls
 
 
-**7. Connect to the API Server**
+**7. Connect to the API Server**  
      The API server can be connected with the external IP address of the load balancer with the /api extension.
      
    ***Example:***
