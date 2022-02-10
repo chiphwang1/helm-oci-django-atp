@@ -110,11 +110,11 @@ The following are the files kept in the secret with the key as the file name and
 
 
 
-## How to Connect the Django Web Framework to an Autonomous Database
+## How to Connect the Django Web Framework to an Autonomous Database. The following step are automated with this Helm Chart.
 
 The Django Web Framework requires the folloiwng prerequistes to to connect to an Autonomous Database.
 
-**1. The Oracle instant clinet installed on the web Django web server** 
+**1. The Oracle instant client needs to be installed on the web Django web server** 
      
      https://www.oracle.com/database/technologies/instant-client/downloads.html
      
@@ -126,6 +126,12 @@ The Django Web Framework requires the folloiwng prerequistes to to connect to an
      
      ```
      The wallet files will needs to be added to the /usr/lib/oracle/21/client64/lib/network/admin/ directory.
+
+**2. The cx_Oracle python libary needs to be installed on the Django web server** 
+     ```
+     pip install cx_oracle
+     
+     ```
 
 
 ## Autonomous Database Specification Parameters
