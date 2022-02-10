@@ -4,14 +4,9 @@
 
 ## Introduction
 
-This Helm Chart will deploy an Oracle Cloud Infrastructure (OCI) Autonomous Database with an API server built with the Django Web Framework. The API server will provide access to a user-profile database on the Autonomous Database to perfrom create, read, update and delete (CRUD) operations on the database. The API server will be accessible via a loadbalancer provisioned with an external IP address.
+This Helm Chart will demonstrate how to automate the deployment of a web server built with the Django Web Framework and connect it to an Oracle Autonomous Database instance (ATP)  in a Container Engine for Kubernetes (OKE) cluster. Installing this Helm chart will allow you to create a new Autonomous Database instance or connect to an existing instance in Oracle Cloud Infrastructure (OCI). A custom resource definition (CRD)  will be produced as a designation for the  ATP and can be managed like any other Kubernetes resource with the command-line tool, kubectl.
 
-To access the API server use /api extenison to the IP address of the loadbalancer.
-
-**Example**  
-http://<ip address of laodbalancer>/api/
-
-
+An API server built with the Django Web Framework will be deployed to provide access to a user-profile database on the Autonomous Database to perform create, read, update and delete (CRUD) operations. The API server will be accessible via a load balancer provisioned with an external IP address.
 
 This Helm chart relies on the OCI Service Operator for Kubernetes (OSOK), and it is a pre-requisite to have OSOK deployed within the cluster to use this Helm chart.
 
@@ -22,7 +17,6 @@ This Helm chart relies on the OCI Service Operator for Kubernetes (OSOK), and it
 - [OCI Service Operator for Kuberntes (OSOK) deployed in the cluster](https://github.com/oracle/oci-service-operator/blob/main/docs/installation.md)
 - [kubectl installed and using the context for the Kubernetes cluster where the ATP resource will be deployed](https://kubernetes.io/docs/tasks/tools/)
 - [Helm installed](https://helm.sh/docs/intro/install/)
-- [Docker installed](https://docs.docker.com/engine/install/)
 
 
 ##  Getting Started
@@ -41,7 +35,10 @@ This Helm chart relies on the OCI Service Operator for Kubernetes (OSOK), and it
 
      kubectl create ns <namespace name>
 
-**5. Install the Helm chart. Best practice is to assign the databse password and wallet password during the installation of the Helm chart instead of adding it to the values.yam file.**
+**5. Install the Helm chart.**
+
+A database and wallet passwords needs to be created for the Autonomous Database. You can define the passwords in the values.yaml file, but it is best not to have passwords written to code. You can specify the passwords during the installation of the Helm chart with the following command.
+
 
      helm -n <namespace name> install \
      --set dbPassword=<database password> \  
@@ -59,14 +56,29 @@ The password must be between 8 and 32 characters long, and must contain at least
      helm  -n <namespace name> ls
 
 
-**7. To uninstall the Helm chart**
+**7. Connect to the API Server**
+     The API server can be connected with the external IP address of the load balancer with the /api extension.
+     
+   ***Example:***
+   ```
+   http://<ip address of load balancer>/api
+   
+   ```  
+   To retrieve the IP adddress of the load balanacer use the following command
+   
+```sh
+$ kubectl -n <name of namespace> get svc django-service
+
+NAME             TYPE           CLUSTER-IP      EXTERNAL-IP       PORT(S)        AGE
+django-service   LoadBalancer   10.96.253.175   129.153.142.122   80:32438/TCP   9h
+```
+     
+**8. To uninstall the Helm chart**
 
      helm uninstall -n <namespace name> <name of the install> .
-     
-     
    **Important Note**
  
-Uninstalling the helm chart will only remove the ATP resource from the cluster and not OCI. You will need to use the console or the OCI CLI to remove the ATP from OCI. This function is to prevent accidental deletion of the database.
+Uninstalling the helm chart will only remove the Autonomous Databaseresource from the cluster and not from OCI. You will need to use the console or the OCI CLI to remove the ATP from OCI. This function is to prevent accidental deletion of the database.
 
      
   **Notes/Issues:**
@@ -82,8 +94,10 @@ autodbtest301   autodbtest301   OLTP         Active   ocid1.autonomousdatabase.o
 ```
 
  ## Accessing the Database
+ 
+ Oracle client credentials (wallet files) are required to connect to an Autonomous Database. Typically wallet files are downloaded from the OCI console or CLI, but the wallet files are also exposed as a secret within the Kubernetes cluster. The name of the secret is defined in values.yaml file under wallet.walletName and can be extracted with the kubectl command-line. In this Helm chart, the secret is extracted with a python script. An example of the script is provided in the python folder in this repository.
 
-Once the  ATP is ready, a secret with the name defined in values.yaml file under wallet.walletName will be created to expose the wallet files required to connect to the ATP.
+## How to Connect Django Web Framework to Autonomous Database
 
 
 | Parameter          | Description                                                              | Type   |
@@ -104,19 +118,6 @@ Once the  ATP is ready, a secret with the name defined in values.yaml file under
      
 
 
-**3. Deploy the container image into a Kubernetes cluster**. 
-
-One way to use the packaged Python script is to use it in an init-container for the application container in a Kubernetes pod. The init-container will run, and when the ATP is ready, it will write the wallet files to a location that is accessible to the application container.
-
-Since the Kubernetes pod will be contacting the Kubernetes API server to check for the creation of secrets, the appropriate permissions need to the assigned to the pod. In the templates directory, the role.yaml, the role-binding.yaml file sets the permissions to access secrets to the internal-kubectl service account. This service account will need to be assigned to the Kubernetes pod to read secrets from the Kubernetes API server.
-
-In the following example, the pods in the deployment are assigned the service account internal-kubectl, which has permission to contact the Kubernetes API server to read secrets. The init-container and the application container have the wallet volume mounted and is accessible to both. The init-container will run the Python script and write the wallet files to the wallet volume, where the application container can read the files
-```
-
-
-
-
-```
 
 ## Autonomous Database Specification Parameters
 
