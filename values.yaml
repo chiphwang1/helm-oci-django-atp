@@ -56,7 +56,7 @@ secretPath: '/wallet/'
 
 # specify service level for Autonomous . This a combination of the name of Autonomous DB defined in in the na,es field above
 #  + _high , _medium, _low  for service level
-# example 'autodbtest401_high'
+# example 'autodbtest501_high'
 dbServiceLevel: 
 
 
