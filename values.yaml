@@ -51,7 +51,7 @@ replicaCount: 1
 initContainerImage: 'chiphwang/checkautodb:2.1'
 # (Required)
 containerImage: 'chiphwang/django_atp:1.6'
-# location to write wallet files (Required)
+# location to write wallet files (Required) Do not chnage for this Hekm chart
 secretPath: '/wallet/'
 
 # specify service level for Autonomous . This a combination of the name of Autonomous DB defined in in the na,es field above
