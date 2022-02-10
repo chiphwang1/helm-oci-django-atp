@@ -27,7 +27,7 @@ This Helm chart relies on the OCI Service Operator for Kubernetes (OSOK), and it
 **2. Change to the directory that holds the Helm Chart** 
 
       cd ./helm-oci-django-atp.git  
-
+        
 **3. Populate the values.yaml file with the required information ** 
 
 **4. Create the namespace where the ATP resource will be deployed**
