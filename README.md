@@ -119,23 +119,24 @@ The Django Web Framework requires the folloiwng prerequistes to to connect to an
      https://www.oracle.com/database/technologies/instant-client/downloads.html
      
      To install the client on a Ubuntu server use the 
-     ```
+    
      sudo apt install alien libaio1
      wget https://download.oracle.com/otn_software/linux/instantclient/215000/oracle-instantclient-basic-21.5.0.0.0-1.x86_64.rpm
      sudo alien -i oracle-instantclient-basic-21.5.0.0.0-1.x86_64.rpm
      
-     ```
+    
      The wallet files will needs to be added to the /usr/lib/oracle/21/client64/lib/network/admin/ directory.
 
 **2. The cx_Oracle python libary needs to be installed on the Django web server** 
      
-     ```
+     
      pip install cx_oracle
      
-     ```
+
 **3. The settings.py on the Django server modified to use an Oracle Database**
 
 ```
+
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
