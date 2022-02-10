@@ -76,7 +76,7 @@ django-service   LoadBalancer   10.96.253.175   129.153.142.122   80:32438/TCP  
 
      helm uninstall -n <namespace name> <name of the install> .
  
-Uninstalling the helm chart will only remove the Autonomous Databaseresource from the cluster and not from OCI. You will need to use the console or the OCI CLI to remove the ATP from OCI. This function is to prevent accidental deletion of the database.
+Uninstalling the helm chart will only remove the Autonomous Database resource from the cluster and not from OCI. You will need to use the console or the OCI CLI to remove the ATP from OCI. This function is to prevent accidental deletion of the database.
 
      
   **Notes/Issues:**
