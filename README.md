@@ -117,7 +117,7 @@ The following are the files kept in the secret with the key as the file name and
 **These steps are automated in this Helm Chart. This is to provide guidance to attach your Django applications to an Autonomous Database when 
 creating your container images**.
 
-The Django Web Framework requires the folloiwng prerequistes to to connect to an Autonomous Database.
+The Django Web Framework requires the following prerequistes to to connect to an Autonomous Database.
 
 **1. The Oracle instant client needs to be installed on the web Django web server** 
      
