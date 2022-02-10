@@ -91,7 +91,7 @@ NAME            DISPLAYNAME     DBWORKLOAD   STATUS   OCID                      
 autodbtest301   autodbtest301   OLTP         Active   ocid1.autonomousdatabase.oc1.iad.anuwcljsnlc5nbyazyyzlqxytdmghb5eyafntqnxq6cupu3zmxf6jihz6vna   28m
 ```
 
- ## Accessing the Database
+ ## How to connect to an Autonomous Database
  
  Oracle client credentials (wallet files) are required to connect to an Autonomous Database. Typically wallet files are downloaded from the OCI console or CLI, but the wallet files are also exposed as a secret within the Kubernetes cluster. The name of the secret is defined in values.yaml file under wallet.walletName and can be extracted with the kubectl command-line. In this Helm chart, the secret is extracted with a python script. An example of the script is provided in the python folder in this repository.
 
