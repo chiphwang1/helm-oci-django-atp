@@ -4,7 +4,7 @@
 
 ## Introduction
 
-This Helm Chart will demonstrate how to automate the deployment of a web server built with the Django Web Framework and connect it to an Oracle Autonomous Database instance (ATP)  in a Container Engine for Kubernetes (OKE) cluster. Installing this Helm chart will allow you to create a new Autonomous Database instance or connect to an existing instance in Oracle Cloud Infrastructure (OCI). A custom resource definition (CRD)  will be produced as a designation for the  ATP and can be managed like any Kubernetes resource with the command-line tool, kubectl.
+This Helm Chart will demonstrate how to automate the deployment of a web server built with the Django Web Framework and connect it to an Oracle Autonomous Database instance (ATP)  in a Container Engine for Kubernetes (OKE) cluster. Installing this Helm chart will allow you to create a new Autonomous Database instance or connect to an existing instance in Oracle Cloud Infrastructure (OCI). A custom resource definition (CRD)  will be produced as designation for the  ATP and can be managed like any Kubernetes resource with the command-line tool, kubectl.
 
 An API server built with the Django Web Framework will be deployed to provide access to a user-profile database on the Autonomous Database to perform create, read, update and delete (CRUD) operations. The API server will be accessible via a load balancer provisioned with an external IP address.
 
