@@ -130,7 +130,7 @@ The Django Web Framework requires the following prerequistes to to connect to an
      sudo alien -i oracle-instantclient-basic-21.5.0.0.0-1.x86_64.rpm
      
     
-     The wallet files will needs to be added to the /usr/lib/oracle/21/client64/lib/network/admin/ directory.
+     The wallet files need to be added to the /usr/lib/oracle/21/client64/lib/network/admin/ directory.
 
 **2. The cx_Oracle python libary needs to be installed on the Django web server** 
      
