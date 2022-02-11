@@ -36,7 +36,7 @@ This Helm chart relies on the OCI Service Operator for Kubernetes (OSOK), and it
 
 **5. Install the Helm chart.**
 
-A database and wallet passwords needs to be created for the Autonomous Database. You can define the passwords in the values.yaml file, but it is best not to have passwords written to code. You can specify the passwords during the installation of the Helm chart with the following command.
+A database and wallet passwords needs to be created for the Autonomous Database. You can define the passwords in the values.yaml file, but it is best practice not to have passwords written to code. You can specify the passwords during the installation of the Helm chart with the following command.
 
 
      helm -n <namespace name> install \
